@@ -1,5 +1,5 @@
 #ifdef DYNAMIC_LIB
-    #include "lib1_dyn.h"
+    #include "dynamic.h"
 #else
     #include "lib1.h"
 #endif
@@ -11,12 +11,14 @@
 #include <regex.h>
 #include <time.h>
 #include <sys/times.h>
-#include "dynamic.h"
+
+int code; // return code of some functions
+char* path = "";
 
 
 int main(int argc, char *argv[])
 {
-
+    load_functions("lib1.so");
       
 
     regex_t INIT;
@@ -43,9 +45,8 @@ int main(int argc, char *argv[])
         
         int param = 0;
 
-        char* path = "";
         fputs("rrrreppl>> ",stdout);
-        int code = getline(&command,&commandSize,stdin);
+        code = getline(&command,&commandSize,stdin);
         puts("\n");
         clock_gettime(CLOCK_REALTIME,&start);
         times(&buffer_start);

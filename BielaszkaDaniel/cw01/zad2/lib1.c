@@ -1,6 +1,10 @@
 #include "lib1.h"
 #include <stdlib.h>
 #include <string.h>
+
+int negate;
+
+
 WordCounters Lib1CreateStruct(int size){
     WordCounters tmp;
     tmp.capacity = size;
@@ -40,7 +44,7 @@ void Lib1Count(WordCounters* strct, char* fileName){
     strcat(command, b);
     strcat(command, tmpFile);
 
-    int negate = system(command);
+    negate = system(command);
     
     char* result = readFile(tmpFile);
 

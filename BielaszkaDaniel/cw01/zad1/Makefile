@@ -3,7 +3,7 @@ LIB=lib1
 all:
 	make lib_static
 	make lib_shared
-
+	
 lib_static: $(LIB).c
 	gcc -Wall -c $(LIB).c
 	ar cr $(LIB).a $(LIB).o
