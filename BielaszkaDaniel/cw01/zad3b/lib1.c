@@ -25,7 +25,7 @@ char* readFile(char* filename){
     FILE* file = fopen(filename,"r");
     long size = tmpfile_size(file);
     char* result = calloc(size, sizeof(char));
-    fread(result, sizeof(char), size, file);
+    negate = fread(result, sizeof(char), size, file);
     fclose(file);
     return result;
 }
@@ -61,7 +61,7 @@ void Lib1Count(WordCounters* strct, char* fileName){
 
     char cmmd[50] = "rm -f ";
     strcat(cmmd,tmpFile);
-    system(cmmd);
+    negate = system(cmmd);
 
 }
 
