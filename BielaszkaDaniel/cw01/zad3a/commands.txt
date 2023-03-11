@@ -1,0 +1,23 @@
+init 7
+count main.c
+count dynamic.h
+count dynamicLib.h
+count lib1.c
+count lib1.h
+count Makefile
+count command.txt
+show 0
+show 1
+show 2
+show 3
+show 4
+show 6
+delete 0
+delete 0
+delete 0
+delete 0
+delete 0
+delete 0
+delete 0
+destroy
+exit
