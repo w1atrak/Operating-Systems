@@ -60,6 +60,10 @@ int main(int argc, char *argv[])
                 continue;
             }
             sscanf(command,"init %d", &param);
+            if(param<1){
+                fprintf(stderr,"wrong size\n");
+                continue;
+            }
             obj = Lib1CreateStruct(param);
             initialized = 1;
         }
@@ -78,6 +82,10 @@ int main(int argc, char *argv[])
                 continue;
             }
             sscanf(command,"show %d",&param);
+            if(param<1){
+                fprintf(stderr,"wrong index\n");
+                continue;
+            }
             printf("%s",Lib1GetBlock(&obj,param));
         }
         else if(regexec(&DELETE,command,0,NULL,0)==0){
@@ -86,6 +94,10 @@ int main(int argc, char *argv[])
                 continue;
             }
             sscanf(command,"delete %d",&param);
+            if(param<1){
+                fprintf(stderr,"wrong index\n");
+                continue;
+            }
             Lib1RemoveBlock(&obj,param);
         }
         else if(regexec(&DESTROY,command,0,NULL,0)==0){

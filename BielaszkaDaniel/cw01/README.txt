@@ -4,6 +4,7 @@ w zad1 do skompilowania obu bibliotek wystarczy: make all
 
 w zad2 podobnie
 polecenie do usuwania zadanego indexu to u mnie: delete <liczba oznaczajca index>
+dodatkowe polecenie do zamykania programu: exit
 
 w zad3a wystarczy: make test
 pojawi sie plik report.txt zawierajacy wyniki
