@@ -23,6 +23,9 @@ long tmpfile_size(FILE* file){
 
 char* readFile(char* filename){
     FILE* file = fopen(filename,"r");
+    if(file==NULL){
+        fprintf(stderr,"cant open file");
+    }
     long size = tmpfile_size(file);
     char* result = calloc(size, sizeof(char));
     negate = fread(result, sizeof(char), size, file);
@@ -31,6 +34,7 @@ char* readFile(char* filename){
 }
 
 void Lib1Count(WordCounters* strct, char* fileName){
+    
     char tmpFile[] = "/tmp/fileXXXXXX";
     int returnCode = mkstemp(tmpFile);
 
@@ -38,6 +42,17 @@ void Lib1Count(WordCounters* strct, char* fileName){
         fprintf(stderr,"cant create a file in /tmp");
     }
     fileName[strcspn(fileName,"\n")] = 0;
+
+    FILE* file = fopen(fileName,"r");
+    if(file==NULL){
+        fprintf(stderr,"cant open file\n");
+        return;
+    }
+    else{
+        fclose(file);
+    }
+    
+
     char command[50] = "wc ";
     char* b = " 1> ";
     char* cc = " 2>/dev/null";
