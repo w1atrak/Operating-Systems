@@ -12,8 +12,6 @@ all:
 
 
 
-
-
 lib_static: $(LIB).c dynamic.h
 	gcc -Wall  -c $(LIB).c
 	ar cr $(LIB).a $(LIB).o

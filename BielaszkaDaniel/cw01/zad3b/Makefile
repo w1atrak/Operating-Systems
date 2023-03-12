@@ -46,9 +46,12 @@ program_dynamic: $(LIB).c $(DEPEND)
 
 test:
 	
+	echo "static_$(SUFFIX) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> results_static_$(SUFFIX).txt
 	./main_static.exe < commands.txt > results_static_$(SUFFIX).txt
+	echo "shared_$(SUFFIX) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> results_shared_$(SUFFIX).txt
 	./main_shared.exe < commands.txt > results_shared_$(SUFFIX).txt
-	# ./main_dynamic.exe < commands.txt > results_dynamic_$(SUFFIX).txt 2> /dev/null
+	echo "dynamic_$(SUFFIX) >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> results_dynamic_$(SUFFIX).txt
+	./main_dynamic.exe < commands.txt > results_dynamic_$(SUFFIX).txt 2> /dev/null
 
 	
 
@@ -115,20 +118,20 @@ report:
 	cat results_shared_O0.txt >> report.txt
 
 
-	# echo "dynamic_O >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
-	# cat results_dynamic_O.txt >> report.txt
+	echo "dynamic_O >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
+	cat results_dynamic_O.txt >> report.txt
 
-	# echo "dynamic_O1 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
-	# cat results_dynamic_O1.txt >> report.txt
+	echo "dynamic_O1 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
+	cat results_dynamic_O1.txt >> report.txt
 
-	# echo "dynamic_O2 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
-	# cat results_dynamic_O2.txt >> report.txt
+	echo "dynamic_O2 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
+	cat results_dynamic_O2.txt >> report.txt
 
-	# echo "dynamic_O3 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
-	# cat results_dynamic_O3.txt >> report.txt
+	echo "dynamic_O3 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
+	cat results_dynamic_O3.txt >> report.txt
 
-	# echo "dynamic_Os >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
-	# cat results_dynamic_Os.txt >> report.txt
+	echo "dynamic_Os >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
+	cat results_dynamic_Os.txt >> report.txt
 
-	# echo "dynamic_O0 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
-	# cat results_dynamic_O0.txt >> report.txt
+	echo "dynamic_O0 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
+	cat results_dynamic_O0.txt >> report.txt

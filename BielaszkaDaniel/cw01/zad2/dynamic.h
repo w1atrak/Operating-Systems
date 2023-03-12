@@ -10,8 +10,6 @@ typedef struct {
 
 
 
-
-
 WordCounters (*Lib1CreateStruct)(int);
 
 void (*Lib1Count)(WordCounters* , char* );

@@ -37,7 +37,7 @@ test:
 	make all
 	./main_static.exe < commands.txt > results_static.txt
 	./main_shared.exe < commands.txt > results_shared.txt
-	# ./main_dynamic.exe < commands.txt > results_dynamic.txt 2> /dev/null
+	./main_dynamic.exe < commands.txt > results_dynamic.txt 2> /dev/null
 
 	touch report.txt
 	echo "static >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
@@ -45,9 +45,9 @@ test:
 
 	echo "shared >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
 	cat results_shared.txt >> report.txt
-	
+
 	echo "dynamic >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" >> report.txt
-	#cat results_dynamic.txt >> report.txt
+	cat results_dynamic.txt >> report.txt
 
 clean: 
 	rm -f *.o *.a *.so *.exe results*.txt report.txt

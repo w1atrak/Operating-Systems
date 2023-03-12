@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+int negate;
+
+
 WordCounters Lib1CreateStruct(int size){
     WordCounters tmp;
     tmp.capacity = size;
@@ -10,42 +13,61 @@ WordCounters Lib1CreateStruct(int size){
 
     return tmp;
 }
-// https://stackoverflow.com/questions/238603/how-can-i-get-a-files-size-in-c
-int tmpfile_size(char* filename){
-    FILE* file = fopen(filename,"r");
+long tmpfile_size(FILE* file){
     fseek(file, 0,SEEK_END);
-    int size = ftell(file);
+    long size = ftell(file);
     fseek(file,0,SEEK_SET);
-    fclose(file);
 
     return size;
 }
 
+char* readFile(char* filename){
+    FILE* file = fopen(filename,"r");
+    if(file==NULL){
+        fprintf(stderr,"cant open file");
+    }
+    long size = tmpfile_size(file);
+    char* result = calloc(size, sizeof(char));
+    negate = fread(result, sizeof(char), size, file);
+    fclose(file);
+    return result;
+}
+
 void Lib1Count(WordCounters* strct, char* fileName){
-    //https://pubs.opengroup.org/onlinepubs/009695399/functions/mkstemp.html
+    
     char tmpFile[] = "/tmp/fileXXXXXX";
     int returnCode = mkstemp(tmpFile);
 
     if(returnCode==0){
         fprintf(stderr,"cant create a file in /tmp");
     }
+    fileName[strcspn(fileName,"\n")] = 0;
+
+    FILE* file = fopen(fileName,"r");
+    if(file==NULL){
+        fprintf(stderr,"cant open file\n");
+        return;
+    }
+    else{
+        fclose(file);
+    }
+    
 
     char command[50] = "wc ";
-    char* b = " > ";
+    char* b = " 1> ";
+    char* cc = " 2>/dev/null";
     strcat(command, fileName);
     strcat(command, b);
     strcat(command, tmpFile);
+    strcat(command, cc);
 
-    system(command);
 
-    int size = tmpfile_size(tmpFile);
-    char* newBlock = calloc(size+1,sizeof(char));
-    FILE* file = fopen(tmpFile,"r");
-    fread(newBlock,sizeof(char),size,file);
-    fclose(file);
+    negate = system(command);
+    
+    char* result = readFile(tmpFile);
 
     if(strct->size < strct->capacity){
-        (strct->blocks)[strct->size] = newBlock;
+        strct->blocks[strct->size] = result;
         strct->size = strct->size + 1;
     }
     else{
@@ -54,13 +76,13 @@ void Lib1Count(WordCounters* strct, char* fileName){
 
     char cmmd[50] = "rm -f ";
     strcat(cmmd,tmpFile);
-    system(cmmd);
+    negate = system(cmmd);
 
 }
 
-char* Lib1GetBlock(WordCounters strct, int index){
-    if(index < strct.size){
-        return (strct.blocks)[index];
+char* Lib1GetBlock(WordCounters* strct, int index){
+    if(index < strct->size){
+        return strct->blocks[index];
     }
     else{
         fprintf(stderr,"index out of range");
@@ -69,7 +91,10 @@ char* Lib1GetBlock(WordCounters strct, int index){
 }
 
 void Lib1RemoveBlock(WordCounters* strct, int index){
-    if(strct->size==0) return;
+    if(strct->size==0) {
+        fprintf(stderr,"no data saved yet");
+        return;
+    }
     if(index>=strct->size) fprintf(stderr,"index out of range");
 
     free(strct->blocks[index]);

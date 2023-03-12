@@ -5,7 +5,7 @@ count dynamicLib.h
 count lib1.c
 count lib1.h
 count Makefile
-count command.txt
+count commands.txt
 show 0
 show 1
 show 2
