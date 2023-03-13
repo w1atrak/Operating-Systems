@@ -1,0 +1,10 @@
+Pomiar czasu dla 1 bajtu:
+Time: 138355
+Time: 45767
+Time: 273964
+Time: 343336
+Pomiar czasu dla 1024 bajtów:
+Time: 95662
+Time: 68450
+Time: 62761
+Time: 89250

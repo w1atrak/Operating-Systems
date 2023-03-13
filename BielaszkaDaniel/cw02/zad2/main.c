@@ -1,9 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <time.h>
+#include <sys/times.h>
 
 #ifndef CHARS_NUMBER
-#define CHARS_NUMBER 1024
+#define CHARS_NUMBER 1
 #endif
 
 long fileSize(FILE* file){
@@ -36,6 +38,12 @@ int main(int argc, char** argv){
         fprintf(stderr, "File doesn't exist\n");
         return 2;
     }
+
+    struct timespec start, end;
+    clock_gettime(CLOCK_REALTIME, &start);
+
+
+
     long f_size = fileSize(file_in);
     char* tmp = (char*)calloc(f_size, sizeof(char));
 
@@ -49,6 +57,9 @@ int main(int argc, char** argv){
     fprintf(file_out, "%s", tmp);
     fclose(file_in);
     fclose(file_out);
+
+    clock_gettime(CLOCK_REALTIME, &end);
+    printf("Time: %ld\n", end.tv_nsec - start.tv_nsec);
 }
 
 

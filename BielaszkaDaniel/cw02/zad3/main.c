@@ -16,7 +16,6 @@ int main(int argc, char** argv){
     }
     struct dirent* files;
     struct stat st;
-    printf("%lld",sum);
     while((files = readdir(dir))!= NULL){
         stat(files->d_name, &st);
         if(!S_ISDIR(st.st_mode)){
