@@ -1,0 +1,6 @@
+Pomiar czasu dla funkcji systemowych:
+Time: 67618
+Time: 48392
+Pomiar czasu dla funkcji bibliotecznych:
+Time: 9395510
+Time: 103666

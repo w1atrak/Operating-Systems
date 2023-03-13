@@ -5,6 +5,9 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <time.h>
+#include <sys/times.h>
+
 
 
 int sys_file;
@@ -96,6 +99,10 @@ int main(int argc, char *argv[])
     }
     else
         fclose(file);
+
+
+    struct timespec start, end;
+    clock_gettime(CLOCK_REALTIME, &start);
         
     
     openingRead(source_file);
@@ -105,7 +112,6 @@ int main(int argc, char *argv[])
     closing();
 
     char* tmp2 = tmp;
-    puts(tmp2);
     while(*tmp2)
     {
         if(*tmp2 == find)
@@ -113,12 +119,13 @@ int main(int argc, char *argv[])
         tmp2++;
     }
 
-    puts(tmp);
 
     openingWrite(output_file);
 
     writeContentToFile(tmp);
     closing();
 
+    clock_gettime(CLOCK_REALTIME, &end);
+    printf("Time: %ld\n", end.tv_nsec - start.tv_nsec);
 
 }
